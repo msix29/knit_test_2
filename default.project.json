@@ -42,6 +42,7 @@
         }
       }
     },
+    
     "Lighting": {
       "$properties": {
         "Ambient": [
@@ -55,10 +56,27 @@
         "Technology": "Voxel"
       }
     },
+
     "SoundService": {
       "$properties": {
         "RespectFilteringEnabled": true
       }
+    },
+
+    "StarterPack": {
+      "Block1": {
+        "$className": "Tool",
+        "Handle": {
+          "$className": "Part",
+          "$properties": {
+            "Size": [2, 2, 2]
+          }
+        }
+      }
+    },
+
+    "StarterGui": {
+      "$path": "src/StarterGui"
     }
   }
 }
