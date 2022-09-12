@@ -22,9 +22,9 @@ local placementService = knit.GetService("placementService")
 
 character.ChildAdded:Connect(function(child)
     if child:IsA("Tool") then
-        local clone = child.Handle:Clone()
-        clone.Parent = workspace
-        clone.Transparency = .8
+        -- local clone = child.Handle:Clone()
+        -- clone.Parent = workspace
+        -- clone.Transparency = .8
 
         -- runService.RenderStepped:Connect(function()
         --     clone.Orientation = Vector3.new(0, 0, 0)

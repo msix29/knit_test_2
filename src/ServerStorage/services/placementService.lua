@@ -9,7 +9,9 @@ local placementService = knit.CreateService{
     Client = {
         placeBlock = knit.CreateSignal(),
         destroyBlock = knit.CreateSignal()
-    }
+	},
+	placedBlocks = {},
+	destroyedBlocks = {},
 }
 
 local function _snipToGrid(position, grid)
@@ -31,13 +33,31 @@ local function _placeBlock(block, position)
 end
 
 function placementService:KnitInit()
-    self.Client.placeBlock:Connect(function(player, block, position)
+	self.Client.placeBlock:Connect(function(player, block, position)
+		if not self.placedBlocks[player] then self.placedBlocks[player] = 0 end
+		
+		self.placedBlocks[player] += 1
+		player.stats.placedBlocks.Value += 1
+		
         _placeBlock(block, position)
     end)
 
-    self.Client.destroyBlock:Connect(function(player, block)
+	self.Client.destroyBlock:Connect(function(player, block)
+		if not self.destroyedBlocks[player] then self.destroyedBlocks[player] = 0 end
+
+		self.destroyedBlocks[player] += 1
+		player.stats.destroyedBlocks.Value += 1
+		
         block:Destroy()
     end)
+end
+
+function placementService:GetPlacedBlocks(player)
+	return self.placedBlocks[player] or 0
+end
+
+function placementService:GetDestroyedBlocks(player)
+	return self.destroyedBlocks[player] or 0
 end
 
 return placementService
